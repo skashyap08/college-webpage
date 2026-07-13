@@ -443,4 +443,11 @@ section h2::after{
 
     transition:.4s;
 }
+.navbar.active{
 
+    padding:14px 8%;
+
+    background:white;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}

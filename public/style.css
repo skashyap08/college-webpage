@@ -1678,3 +1678,342 @@ section h2::after{
     }
 
 }
+/* ==========================================================
+   PART 2C-2
+   TESTIMONIALS SECTION
+========================================================== */
+
+.testimonials{
+    background:#f8fbff;
+    position:relative;
+    overflow:hidden;
+}
+
+/* Background Decorations */
+
+.testimonials::before{
+    content:"";
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:rgba(37,99,235,.08);
+    top:-160px;
+    right:-120px;
+}
+
+.testimonials::after{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    background:rgba(124,58,237,.08);
+    bottom:-120px;
+    left:-100px;
+}
+
+/* =========================
+     SLIDER CONTAINER
+========================= */
+
+.testimonial-slider{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+
+    gap:35px;
+
+    margin-top:60px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+/* =========================
+      TESTIMONIAL CARD
+========================= */
+
+.testimonial{
+
+    background:#ffffff;
+
+    padding:40px 35px;
+
+    border-radius:22px;
+
+    box-shadow:0 18px 45px rgba(0,0,0,.08);
+
+    transition:.4s;
+
+    position:relative;
+
+    overflow:hidden;
+
+    cursor:pointer;
+}
+
+/* Top Border */
+
+.testimonial::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:6px;
+
+    background:linear-gradient(90deg,#2563eb,#7c3aed,#06b6d4);
+
+    transform:scaleX(0);
+
+    transform-origin:left;
+
+    transition:.4s;
+}
+
+.testimonial:hover::before{
+
+    transform:scaleX(1);
+}
+
+/* Decorative Circle */
+
+.testimonial::after{
+
+    content:"❝";
+
+    position:absolute;
+
+    right:25px;
+
+    top:15px;
+
+    font-size:90px;
+
+    color:rgba(37,99,235,.08);
+
+    font-weight:bold;
+}
+
+/* =========================
+         AVATAR
+========================= */
+
+.testimonial img{
+
+    width:85px;
+
+    height:85px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:4px solid #2563eb;
+
+    margin-bottom:25px;
+}
+
+/* =========================
+        REVIEW TEXT
+========================= */
+
+.testimonial p{
+
+    color:#64748b;
+
+    line-height:1.9;
+
+    margin-bottom:25px;
+
+    font-size:16px;
+}
+
+/* =========================
+        STUDENT NAME
+========================= */
+
+.testimonial h4{
+
+    color:#0f172a;
+
+    font-size:20px;
+
+    margin-bottom:6px;
+}
+
+.testimonial span{
+
+    color:#2563eb;
+
+    font-size:14px;
+
+    font-weight:500;
+}
+
+/* =========================
+        STAR RATING
+========================= */
+
+.testimonial .stars{
+
+    display:flex;
+
+    gap:5px;
+
+    margin-bottom:20px;
+}
+
+.testimonial .stars i{
+
+    color:#fbbf24;
+
+    font-size:18px;
+}
+
+/* =========================
+       HOVER EFFECT
+========================= */
+
+.testimonial:hover{
+
+    transform:translateY(-12px);
+
+    box-shadow:0 28px 60px rgba(0,0,0,.16);
+}
+
+/* =========================
+     SOCIAL ICONS
+========================= */
+
+.student-social{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:18px;
+}
+
+.student-social a{
+
+    width:38px;
+
+    height:38px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#eef4ff;
+
+    color:#2563eb;
+
+    transition:.35s;
+}
+
+.student-social a:hover{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    transform:translateY(-5px);
+}
+
+/* =========================
+      ANIMATION
+========================= */
+
+.testimonial{
+
+    animation:testimonialFade .9s ease;
+}
+
+@keyframes testimonialFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(60px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+
+}
+
+/* =========================
+      RESPONSIVE
+========================= */
+
+@media(max-width:992px){
+
+    .testimonial-slider{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:768px){
+
+    .testimonial-slider{
+
+        grid-template-columns:1fr;
+    }
+
+    .testimonial{
+
+        padding:30px;
+    }
+
+    .testimonial img{
+
+        width:75px;
+        height:75px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .testimonial{
+
+        text-align:center;
+    }
+
+    .testimonial img{
+
+        margin:auto auto 20px;
+    }
+
+    .testimonial .stars{
+
+        justify-content:center;
+    }
+
+    .student-social{
+
+        justify-content:center;
+    }
+
+}

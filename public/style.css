@@ -424,4 +424,23 @@ section h2::after{
 
     transform:translateY(0);
 }
+.btn:active{
+
+    transform:scale(.95);
+}
+
+.btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:50px;
+
+    opacity:0;
+
+    transition:.4s;
+}
 

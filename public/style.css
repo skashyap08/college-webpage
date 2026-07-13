@@ -514,3 +514,444 @@ section h2::after{
         margin:auto;
     }
 }
+/* ===========================================================
+   PART 2B-1
+   FEATURES SECTION + COUNTER SECTION
+   ===========================================================*/
+
+/*==========================
+        FEATURES
+==========================*/
+
+.features{
+    background:#ffffff;
+}
+
+.feature-container{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:35px;
+
+    margin-top:40px;
+}
+
+.card{
+
+    background:#ffffff;
+
+    padding:40px 30px;
+
+    text-align:center;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    transition:.4s;
+
+    position:relative;
+
+    overflow:hidden;
+
+    cursor:pointer;
+}
+
+/* Top Gradient Border */
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:6px;
+
+    background:linear-gradient(90deg,#2563eb,#7c3aed,#06b6d4);
+
+    transform:scaleX(0);
+
+    transform-origin:left;
+
+    transition:.45s;
+}
+
+.card:hover::before{
+
+    transform:scaleX(1);
+}
+
+/* Floating Circle */
+
+.card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:160px;
+
+    height:160px;
+
+    background:rgba(37,99,235,.08);
+
+    border-radius:50%;
+
+    top:-90px;
+
+    right:-80px;
+
+    transition:.45s;
+}
+
+.card:hover::after{
+
+    transform:scale(1.3);
+}
+
+.card i{
+
+    font-size:55px;
+
+    color:#2563eb;
+
+    margin-bottom:25px;
+
+    transition:.4s;
+}
+
+.card:hover i{
+
+    transform:rotate(10deg) scale(1.15);
+
+    color:#7c3aed;
+}
+
+.card h3{
+
+    font-size:24px;
+
+    margin-bottom:15px;
+
+    color:#0f172a;
+}
+
+.card p{
+
+    color:#64748b;
+
+    line-height:1.8;
+}
+
+.card:hover{
+
+    transform:translateY(-15px);
+
+    box-shadow:0 25px 55px rgba(0,0,0,.15);
+}
+
+/*==========================
+      FEATURE ICON GLOW
+==========================*/
+
+.card i{
+
+    position:relative;
+}
+
+.card i::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:15px;
+
+    height:15px;
+
+    border-radius:50%;
+
+    background:#06b6d4;
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    filter:blur(18px);
+
+    opacity:.7;
+
+    z-index:-1;
+}
+
+/*==========================
+     FEATURE ANIMATION
+==========================*/
+
+.card{
+
+    animation:fadeCard .8s ease;
+}
+
+@keyframes fadeCard{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(60px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+}
+
+/*==========================
+      FEATURE BUTTON
+==========================*/
+
+.feature-btn{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    color:#2563eb;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.feature-btn:hover{
+
+    letter-spacing:1px;
+
+    color:#7c3aed;
+}
+
+/*==========================
+        COUNTER
+==========================*/
+
+.counter{
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    color:#ffffff;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:35px;
+
+    border-radius:25px;
+
+    margin:80px 8%;
+
+    padding:60px 40px;
+
+    box-shadow:0 20px 45px rgba(37,99,235,.25);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+/* Decorative */
+
+.counter::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:320px;
+
+    height:320px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    top:-170px;
+
+    left:-120px;
+}
+
+.counter::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+
+    height:260px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.06);
+
+    bottom:-140px;
+
+    right:-80px;
+}
+
+/* Counter Box */
+
+.counter-box{
+
+    text-align:center;
+
+    position:relative;
+
+    z-index:2;
+
+    transition:.35s;
+}
+
+.counter-box:hover{
+
+    transform:translateY(-10px);
+}
+
+.counter-box h2{
+
+    font-size:58px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+    color:#ffffff;
+}
+
+.counter-box p{
+
+    font-size:18px;
+
+    letter-spacing:1px;
+
+    color:#f8fafc;
+}
+
+/* Divider */
+
+.counter-box:not(:last-child)::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:-18px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:2px;
+
+    height:70px;
+
+    background:rgba(255,255,255,.25);
+}
+
+/* Number Animation */
+
+.count{
+
+    transition:all .4s ease;
+}
+
+/* Pulse */
+
+.counter-box:hover .count{
+
+    transform:scale(1.08);
+}
+
+/* Small Badge */
+
+.counter-box span{
+
+    display:inline-block;
+
+    margin-top:12px;
+
+    padding:5px 14px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.15);
+
+    font-size:13px;
+}
+
+/*==========================
+    MOBILE RESPONSIVE
+==========================*/
+
+@media(max-width:992px){
+
+    .feature-container{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .counter{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .counter-box::after{
+
+        display:none;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .feature-container{
+
+        grid-template-columns:1fr;
+    }
+
+    .counter{
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+
+        margin:60px 20px;
+
+        padding:50px 25px;
+    }
+
+    .counter-box{
+
+        margin-bottom:25px;
+    }
+
+    .counter-box h2{
+
+        font-size:46px;
+    }
+
+}

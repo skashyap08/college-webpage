@@ -361,3 +361,36 @@ header{
 
     border-radius:20px;
 }
+section h2{
+
+    text-align:center;
+
+    font-size:42px;
+
+    margin-bottom:60px;
+
+    color:var(--dark);
+
+    position:relative;
+}
+
+section h2::after{
+
+    content:"";
+
+    width:120px;
+
+    height:5px;
+
+    border-radius:50px;
+
+    background:var(--gradient);
+
+    position:absolute;
+
+    bottom:-18px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+}

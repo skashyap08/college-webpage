@@ -857,3 +857,227 @@ document.head.appendChild(zoomStyle);
 console.log("✔ Image Reveal Loaded");
 console.log("✔ Lazy Loading Enabled");
 console.log("✔ Gallery Effects Loaded");
+/* ==========================================================
+   PART 3B-2B
+   PERFORMANCE + UTILITIES + ANIMATION HELPERS
+========================================================== */
+
+/* ==========================================
+   THROTTLE FUNCTION
+========================================== */
+
+function throttle(func, delay){
+
+    let lastCall = 0;
+
+    return function(...args){
+
+        const now = Date.now();
+
+        if(now - lastCall >= delay){
+
+            lastCall = now;
+
+            func.apply(this,args);
+
+        }
+
+    };
+
+}
+
+/* ==========================================
+   DEBOUNCE FUNCTION
+========================================== */
+
+function debounce(func, delay){
+
+    let timer;
+
+    return function(...args){
+
+        clearTimeout(timer);
+
+        timer = setTimeout(()=>{
+
+            func.apply(this,args);
+
+        },delay);
+
+    };
+
+}
+
+/* ==========================================
+   OPTIMIZED SCROLL EVENT
+========================================== */
+
+window.addEventListener("scroll",
+
+throttle(()=>{
+
+    const scroll = window.scrollY;
+
+    document.documentElement.style.setProperty(
+
+        "--scroll-position",
+
+        scroll
+
+    );
+
+},25)
+
+);
+
+/* ==========================================
+   WINDOW RESIZE
+========================================== */
+
+window.addEventListener(
+
+"resize",
+
+debounce(()=>{
+
+    console.log("Window resized");
+
+},300)
+
+);
+
+/* ==========================================
+   AUTO ADD ANIMATION CLASS
+========================================== */
+
+document.querySelectorAll(
+
+".card,.course-card,.campus-box,.testimonial,.counter-box"
+
+).forEach((el,index)=>{
+
+    el.style.animationDelay = `${index*0.12}s`;
+
+});
+
+/* ==========================================
+   BUTTON HOVER SCALE
+========================================== */
+
+document.querySelectorAll(".btn").forEach(btn=>{
+
+    btn.addEventListener("mouseenter",()=>{
+
+        btn.style.transform="translateY(-6px) scale(1.03)";
+
+    });
+
+    btn.addEventListener("mouseleave",()=>{
+
+        btn.style.transform="";
+
+    });
+
+});
+
+/* ==========================================
+   RANDOM FLOATING EFFECT
+========================================== */
+
+const floatItems=document.querySelectorAll(
+
+".card,.course-card"
+
+);
+
+setInterval(()=>{
+
+    floatItems.forEach(item=>{
+
+        item.style.transform=
+
+        `translateY(${Math.random()*4}px)`;
+
+    });
+
+},2500);
+
+/* ==========================================
+   KEYBOARD SHORTCUT
+========================================== */
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Home"){
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+    }
+
+});
+
+/* ==========================================
+   COPY EMAIL
+========================================== */
+
+const copyBtn=document.querySelector(".copy-email");
+
+if(copyBtn){
+
+copyBtn.addEventListener("click",()=>{
+
+const email=copyBtn.dataset.email;
+
+navigator.clipboard.writeText(email);
+
+copyBtn.innerText="Copied!";
+
+setTimeout(()=>{
+
+copyBtn.innerText="Copy Email";
+
+},2000);
+
+});
+
+}
+
+/* ==========================================
+   SIMPLE PAGE FADE
+========================================== */
+
+document.body.style.opacity="0";
+
+window.addEventListener("load",()=>{
+
+document.body.style.transition="opacity .6s";
+
+document.body.style.opacity="1";
+
+});
+
+/* ==========================================
+   MEMORY CLEANUP
+========================================== */
+
+window.addEventListener("beforeunload",()=>{
+
+window.removeEventListener("scroll",()=>{});
+
+window.removeEventListener("resize",()=>{});
+
+});
+
+/* ==========================================
+   PERFORMANCE LOG
+========================================== */
+
+console.log("✔ Performance utilities loaded");
+console.log("✔ Debounce & Throttle enabled");
+console.log("✔ Animation helpers loaded");

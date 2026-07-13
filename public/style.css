@@ -409,4 +409,19 @@ section h2::after{
     }
 
 }
+.fade-up{
+
+    opacity:0;
+
+    transform:translateY(50px);
+
+    transition:1s;
+}
+
+.fade-up.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
 

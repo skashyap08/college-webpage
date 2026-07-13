@@ -571,3 +571,289 @@ console.log("%c✔ Scroll Reveal Loaded",
 
 console.log("%c✔ Counter Animation Loaded",
 "color:blue;font-size:14px;");
+/* ==========================================================
+   PART 3B-2A
+   IMAGE REVEAL + LAZY LOADING + GALLERY EFFECTS
+========================================================== */
+
+/* ===========================
+   IMAGE REVEAL ANIMATION
+=========================== */
+
+const images = document.querySelectorAll(
+".hero-image img, .course-card img, .campus-box img, .testimonial img"
+);
+
+const imageObserver = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("img-show");
+
+            imageObserver.unobserve(entry.target);
+
+        }
+
+    });
+
+},{
+    threshold:0.25
+});
+
+images.forEach(img=>{
+
+    img.classList.add("img-hidden");
+
+    imageObserver.observe(img);
+
+});
+
+/* Add CSS dynamically */
+
+const imageAnimation=document.createElement("style");
+
+imageAnimation.innerHTML=`
+
+.img-hidden{
+
+opacity:0;
+
+transform:translateY(40px) scale(.95);
+
+transition:all .8s ease;
+
+}
+
+.img-show{
+
+opacity:1;
+
+transform:translateY(0) scale(1);
+
+}
+
+`;
+
+document.head.appendChild(imageAnimation);
+
+/* ===========================
+      LAZY LOADING
+=========================== */
+
+const lazyImages=document.querySelectorAll("img[data-src]");
+
+const lazyObserver=new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+const img=entry.target;
+
+img.src=img.dataset.src;
+
+img.onload=()=>{
+
+img.classList.add("loaded");
+
+};
+
+lazyObserver.unobserve(img);
+
+}
+
+});
+
+});
+
+lazyImages.forEach(img=>{
+
+lazyObserver.observe(img);
+
+});
+
+/* Loaded Animation */
+
+const lazyStyle=document.createElement("style");
+
+lazyStyle.innerHTML=`
+
+img{
+
+transition:opacity .5s ease;
+
+}
+
+img.loaded{
+
+opacity:1;
+
+}
+
+`;
+
+document.head.appendChild(lazyStyle);
+
+/* ===========================
+      GALLERY HOVER EFFECT
+=========================== */
+
+const galleryItems=document.querySelectorAll(".gallery-item");
+
+galleryItems.forEach(item=>{
+
+item.addEventListener("mouseenter",()=>{
+
+item.style.transform="scale(1.05)";
+
+item.style.transition=".4s";
+
+});
+
+item.addEventListener("mouseleave",()=>{
+
+item.style.transform="scale(1)";
+
+});
+
+});
+
+/* ===========================
+      IMAGE ZOOM EFFECT
+=========================== */
+
+const zoomImages=document.querySelectorAll(".zoom-img");
+
+zoomImages.forEach(img=>{
+
+img.addEventListener("mouseenter",()=>{
+
+img.style.transform="scale(1.12)";
+
+img.style.transition=".4s";
+
+});
+
+img.addEventListener("mouseleave",()=>{
+
+img.style.transform="scale(1)";
+
+});
+
+});
+
+/* ===========================
+      CAMPUS CARD EFFECT
+=========================== */
+
+const campusCards=document.querySelectorAll(".campus-box");
+
+campusCards.forEach(card=>{
+
+card.addEventListener("mousemove",(e)=>{
+
+const rect=card.getBoundingClientRect();
+
+const x=e.clientX-rect.left;
+
+const y=e.clientY-rect.top;
+
+card.style.background=
+
+`radial-gradient(circle at ${x}px ${y}px,
+rgba(255,255,255,.18),
+transparent 65%)`;
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+card.style.background="";
+
+});
+
+});
+
+/* ===========================
+      COURSE CARD GLOW
+=========================== */
+
+const courseCards=document.querySelectorAll(".course-card");
+
+courseCards.forEach(card=>{
+
+card.addEventListener("mouseenter",()=>{
+
+card.style.boxShadow="0 25px 50px rgba(37,99,235,.25)";
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+card.style.boxShadow="";
+
+});
+
+});
+
+/* ===========================
+      PARALLAX IMAGES
+=========================== */
+
+window.addEventListener("scroll",()=>{
+
+const scroll=window.pageYOffset;
+
+images.forEach(img=>{
+
+img.style.transform=`translateY(${scroll*0.03}px)`;
+
+});
+
+});
+
+/* ===========================
+      IMAGE CLICK EFFECT
+=========================== */
+
+images.forEach(img=>{
+
+img.addEventListener("click",()=>{
+
+img.classList.toggle("activeZoom");
+
+});
+
+});
+
+const zoomStyle=document.createElement("style");
+
+zoomStyle.innerHTML=`
+
+.activeZoom{
+
+transform:scale(1.2);
+
+cursor:zoom-out;
+
+transition:.4s;
+
+z-index:100;
+
+position:relative;
+
+}
+
+`;
+
+document.head.appendChild(zoomStyle);
+
+/* ===========================
+      DEBUG
+=========================== */
+
+console.log("✔ Image Reveal Loaded");
+console.log("✔ Lazy Loading Enabled");
+console.log("✔ Gallery Effects Loaded");

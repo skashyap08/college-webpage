@@ -29,3 +29,13 @@ app.get("/faculty", (req, res) => {
 app.get("/contact", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "contact.html"));
 });
+// 404 Page
+app.use((req, res) => {
+    res.status(404).send("<h1>404 - Page Not Found</h1>");
+});
+
+const PORT = 3000;
+
+app.listen(PORT, () => {
+    console.log(`🚀 Server Running at http://localhost:${PORT}`);
+});

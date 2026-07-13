@@ -1081,3 +1081,366 @@ window.removeEventListener("resize",()=>{});
 console.log("✔ Performance utilities loaded");
 console.log("✔ Debounce & Throttle enabled");
 console.log("✔ Animation helpers loaded");
+/* ==========================================================
+   PART 3C-1
+   DARK MODE + TYPING EFFECT + HERO ANIMATIONS
+========================================================== */
+
+/* ==========================================
+   DARK MODE TOGGLE
+========================================== */
+
+const darkToggle = document.querySelector(".dark-mode");
+
+if(darkToggle){
+
+    // Restore saved theme
+    if(localStorage.getItem("theme")==="dark"){
+
+        document.body.classList.add("dark");
+
+        darkToggle.innerHTML='<i class="fa-solid fa-sun"></i>';
+
+    }
+
+    darkToggle.addEventListener("click",()=>{
+
+        document.body.classList.toggle("dark");
+
+        if(document.body.classList.contains("dark")){
+
+            localStorage.setItem("theme","dark");
+
+            darkToggle.innerHTML='<i class="fa-solid fa-sun"></i>';
+
+        }else{
+
+            localStorage.setItem("theme","light");
+
+            darkToggle.innerHTML='<i class="fa-solid fa-moon"></i>';
+
+        }
+
+    });
+
+}
+
+/* ==========================================
+   DARK MODE STYLES
+========================================== */
+
+const darkCSS=document.createElement("style");
+
+darkCSS.innerHTML=`
+
+body.dark{
+
+background:#0f172a;
+
+color:#f8fafc;
+
+transition:.4s;
+
+}
+
+body.dark header,
+body.dark .navbar{
+
+background:#111827;
+
+}
+
+body.dark .card,
+body.dark .course-card,
+body.dark .testimonial,
+body.dark .campus-box{
+
+background:#1e293b;
+
+color:#fff;
+
+}
+
+body.dark footer{
+
+background:#020617;
+
+}
+
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4{
+
+color:#ffffff;
+
+}
+
+body.dark p{
+
+color:#cbd5e1;
+
+}
+
+`;
+
+document.head.appendChild(darkCSS);
+
+/* ==========================================
+   TYPING EFFECT
+========================================== */
+
+const typing=document.querySelector(".typing");
+
+if(typing){
+
+const words=[
+
+"Future Starts Here",
+
+"Learn From Experts",
+
+"Innovate & Create",
+
+"Shape Your Career",
+
+"Welcome To Our College"
+
+];
+
+let wordIndex=0;
+let charIndex=0;
+let deleting=false;
+
+function typeEffect(){
+
+const current=words[wordIndex];
+
+if(!deleting){
+
+typing.textContent=current.substring(0,charIndex++);
+
+if(charIndex>current.length){
+
+deleting=true;
+
+setTimeout(typeEffect,1400);
+
+return;
+
+}
+
+}else{
+
+typing.textContent=current.substring(0,charIndex--);
+
+if(charIndex<0){
+
+deleting=false;
+
+wordIndex=(wordIndex+1)%words.length;
+
+}
+
+}
+
+setTimeout(typeEffect,deleting?45:90);
+
+}
+
+typeEffect();
+
+}
+
+/* ==========================================
+   HERO TEXT FADE ANIMATION
+========================================== */
+
+const heroTitle=document.querySelector(".hero-content h1");
+
+if(heroTitle){
+
+heroTitle.style.opacity="0";
+heroTitle.style.transform="translateY(50px)";
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+heroTitle.style.transition="all 1s ease";
+
+heroTitle.style.opacity="1";
+heroTitle.style.transform="translateY(0)";
+
+},300);
+
+});
+
+}
+
+/* ==========================================
+   HERO BUTTON ANIMATION
+========================================== */
+
+const heroButtons=document.querySelectorAll(".hero-buttons .btn");
+
+heroButtons.forEach((btn,index)=>{
+
+btn.style.opacity="0";
+btn.style.transform="translateY(30px)";
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+btn.style.transition=".8s";
+
+btn.style.opacity="1";
+btn.style.transform="translateY(0)";
+
+},700+(index*250));
+
+});
+
+});
+
+/* ==========================================
+   HERO IMAGE FLOAT
+========================================== */
+
+const heroImg=document.querySelector(".hero-image img");
+
+if(heroImg){
+
+let angle=0;
+
+setInterval(()=>{
+
+angle+=0.03;
+
+heroImg.style.transform=`
+translateY(${Math.sin(angle)*8}px)
+rotate(${Math.sin(angle)*1.5}deg)
+`;
+
+},25);
+
+}
+
+/* ==========================================
+   CURSOR BLINK
+========================================== */
+
+if(typing){
+
+const cursor=document.createElement("span");
+
+cursor.textContent="|";
+
+cursor.style.marginLeft="4px";
+
+typing.after(cursor);
+
+setInterval(()=>{
+
+cursor.style.visibility=
+
+cursor.style.visibility==="hidden"
+
+?"visible":"hidden";
+
+},500);
+
+}
+
+/* ==========================================
+   HERO PARTICLE EFFECT
+========================================== */
+
+const hero=document.querySelector(".hero");
+
+if(hero){
+
+for(let i=0;i<15;i++){
+
+const particle=document.createElement("span");
+
+particle.className="particle";
+
+particle.style.left=Math.random()*100+"%";
+particle.style.top=Math.random()*100+"%";
+particle.style.animationDelay=Math.random()*5+"s";
+
+hero.appendChild(particle);
+
+}
+
+}
+
+const particleStyle=document.createElement("style");
+
+particleStyle.innerHTML=`
+
+.hero{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.particle{
+
+position:absolute;
+
+width:8px;
+
+height:8px;
+
+background:rgba(255,255,255,.4);
+
+border-radius:50%;
+
+animation:floatParticle 6s linear infinite;
+
+pointer-events:none;
+
+}
+
+@keyframes floatParticle{
+
+0%{
+
+transform:translateY(40px);
+
+opacity:0;
+
+}
+
+50%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-250px);
+
+opacity:0;
+
+}
+
+}
+
+`;
+
+document.head.appendChild(particleStyle);
+
+/* ==========================================
+   DEBUG
+========================================== */
+
+console.log("✔ Dark Mode Loaded");
+console.log("✔ Typing Effect Loaded");
+console.log("✔ Hero Animation Loaded");

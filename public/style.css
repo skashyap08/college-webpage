@@ -69,3 +69,28 @@ section{
     background:var(--gradient);
     border-radius:30px;
 }
+body::before{
+    content:"";
+    position:fixed;
+    width:450px;
+    height:450px;
+    background:#2563eb20;
+    border-radius:50%;
+    top:-120px;
+    left:-120px;
+    filter:blur(90px);
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:420px;
+    height:420px;
+    background:#7c3aed20;
+    border-radius:50%;
+    bottom:-150px;
+    right:-100px;
+    filter:blur(90px);
+    z-index:-2;
+}

@@ -293,3 +293,281 @@ console.log("%cFutureTech College Website",
 
 console.log("%cDesigned using HTML CSS JS & Express",
 "color:#7c3aed;font-size:14px;");
+/* ==========================================================
+   PART 3B-1
+   ANIMATED COUNTERS + SCROLL REVEAL
+========================================================== */
+
+/* ==========================================
+   ANIMATED COUNTERS
+========================================== */
+
+const counters = document.querySelectorAll(".count");
+
+const counterObserver = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (!entry.isIntersecting) return;
+
+        const counter = entry.target;
+
+        const target = +counter.dataset.target;
+
+        const speed = 120;
+
+        const updateCounter = () => {
+
+            const current = +counter.innerText;
+
+            const increment = Math.ceil(target / speed);
+
+            if (current < target) {
+
+                counter.innerText = current + increment;
+
+                requestAnimationFrame(updateCounter);
+
+            } else {
+
+                counter.innerText = target;
+
+            }
+
+        };
+
+        updateCounter();
+
+        counterObserver.unobserve(counter);
+
+    });
+
+}, {
+    threshold: 0.4
+});
+
+counters.forEach(counter => {
+    counterObserver.observe(counter);
+});
+
+
+/* ==========================================
+   SCROLL REVEAL
+========================================== */
+
+const revealElements = document.querySelectorAll(
+
+`
+.hero,
+.features,
+.card,
+.counter,
+.counter-box,
+.courses,
+.course-card,
+.campus,
+.campus-box,
+.testimonials,
+.testimonial,
+.cta,
+footer
+`
+
+);
+
+const revealObserver = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},{
+    threshold:0.15
+});
+
+revealElements.forEach(item=>{
+
+    item.classList.add("fade-up");
+
+    revealObserver.observe(item);
+
+});
+
+
+/* ==========================================
+   STAGGERED CARD ANIMATION
+========================================== */
+
+const cards=document.querySelectorAll(
+
+".card,.course-card,.campus-box,.testimonial"
+
+);
+
+cards.forEach((card,index)=>{
+
+    card.style.transitionDelay=`${index*120}ms`;
+
+});
+
+
+/* ==========================================
+   HERO PARALLAX
+========================================== */
+
+const hero=document.querySelector(".hero");
+
+window.addEventListener("scroll",()=>{
+
+    const value=window.scrollY;
+
+    if(hero){
+
+        hero.style.backgroundPositionY=value*0.4+"px";
+
+    }
+
+});
+
+
+/* ==========================================
+   IMAGE FLOAT EFFECT
+========================================== */
+
+const heroImage=document.querySelector(".hero-image img");
+
+window.addEventListener("mousemove",(e)=>{
+
+    if(!heroImage) return;
+
+    const x=(window.innerWidth/2-e.pageX)/45;
+
+    const y=(window.innerHeight/2-e.pageY)/45;
+
+    heroImage.style.transform=
+
+    `translate(${x}px,${y}px)`;
+
+});
+
+
+/* ==========================================
+   BUTTON RIPPLE EFFECT
+========================================== */
+
+const buttons=document.querySelectorAll(".btn");
+
+buttons.forEach(button=>{
+
+    button.addEventListener("click",(e)=>{
+
+        const ripple=document.createElement("span");
+
+        ripple.classList.add("ripple");
+
+        const rect=button.getBoundingClientRect();
+
+        ripple.style.left=(e.clientX-rect.left)+"px";
+
+        ripple.style.top=(e.clientY-rect.top)+"px";
+
+        button.appendChild(ripple);
+
+        setTimeout(()=>{
+
+            ripple.remove();
+
+        },600);
+
+    });
+
+});
+
+
+/* Ripple Style */
+
+const rippleStyle=document.createElement("style");
+
+rippleStyle.innerHTML=`
+
+.btn{
+
+overflow:hidden;
+
+position:relative;
+
+}
+
+.ripple{
+
+position:absolute;
+
+width:15px;
+
+height:15px;
+
+background:rgba(255,255,255,.5);
+
+border-radius:50%;
+
+transform:translate(-50%,-50%);
+
+animation:ripple .6s linear;
+
+pointer-events:none;
+
+}
+
+@keyframes ripple{
+
+0%{
+
+opacity:1;
+
+transform:translate(-50%,-50%) scale(0);
+
+}
+
+100%{
+
+opacity:0;
+
+transform:translate(-50%,-50%) scale(15);
+
+}
+
+}
+
+`;
+
+document.head.appendChild(rippleStyle);
+
+
+/* ==========================================
+   SECTION TITLE ANIMATION
+========================================== */
+
+const titles=document.querySelectorAll("section h2");
+
+titles.forEach(title=>{
+
+    revealObserver.observe(title);
+
+});
+
+
+/* ==========================================
+   CONSOLE MESSAGE
+========================================== */
+
+console.log("%c✔ Scroll Reveal Loaded",
+"color:green;font-size:14px;");
+
+console.log("%c✔ Counter Animation Loaded",
+"color:blue;font-size:14px;");

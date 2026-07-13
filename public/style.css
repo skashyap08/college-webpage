@@ -351,3 +351,13 @@ header{
 
     opacity:.18;
 }
+.glass{
+
+    backdrop-filter:blur(15px);
+
+    background:rgba(255,255,255,.55);
+
+    border:1px solid rgba(255,255,255,.4);
+
+    border-radius:20px;
+}

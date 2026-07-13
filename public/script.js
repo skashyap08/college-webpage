@@ -1810,3 +1810,262 @@ document.head.appendChild(rippleCSS);
 console.log("✔ Testimonial Slider Loaded");
 console.log("✔ Scroll Spy Enabled");
 console.log("✔ Interactive Effects Loaded");
+/* ==========================================================
+   PART 3D-1
+   CONTACT FORM + COURSE SEARCH + COURSE FILTER
+========================================================== */
+
+"use strict";
+
+/* ==========================================
+   CONTACT FORM VALIDATION
+========================================== */
+
+const contactForm = document.querySelector("#contactForm");
+
+if(contactForm){
+
+contactForm.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const name=document.querySelector("#name");
+const email=document.querySelector("#email");
+const subject=document.querySelector("#subject");
+const message=document.querySelector("#message");
+
+const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if(name.value.trim()===""){
+
+alert("Please enter your name.");
+
+name.focus();
+return;
+
+}
+
+if(!emailPattern.test(email.value)){
+
+alert("Enter a valid email address.");
+
+email.focus();
+return;
+
+}
+
+if(subject.value.trim().length<3){
+
+alert("Subject should contain at least 3 characters.");
+
+subject.focus();
+return;
+
+}
+
+if(message.value.trim().length<10){
+
+alert("Message should contain at least 10 characters.");
+
+message.focus();
+return;
+
+}
+
+alert("Message Sent Successfully!");
+
+contactForm.reset();
+
+});
+
+}
+
+/* ==========================================
+   LIVE COURSE SEARCH
+========================================== */
+
+const searchInput=document.querySelector("#courseSearch");
+
+if(searchInput){
+
+searchInput.addEventListener("keyup",function(){
+
+const value=this.value.toLowerCase();
+
+const cards=document.querySelectorAll(".course-card");
+
+cards.forEach(card=>{
+
+const title=card.querySelector("h3").textContent.toLowerCase();
+
+const desc=card.querySelector("p").textContent.toLowerCase();
+
+if(title.includes(value)||desc.includes(value)){
+
+card.style.display="block";
+
+}else{
+
+card.style.display="none";
+
+}
+
+});
+
+});
+
+}
+
+/* ==========================================
+   COURSE FILTER BUTTONS
+========================================== */
+
+const filterButtons=document.querySelectorAll(".filter-btn");
+
+filterButtons.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+document.querySelectorAll(".filter-btn").forEach(btn=>{
+
+btn.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+const filter=button.dataset.filter;
+
+const courses=document.querySelectorAll(".course-card");
+
+courses.forEach(course=>{
+
+if(filter==="all"){
+
+course.style.display="block";
+
+return;
+
+}
+
+if(course.classList.contains(filter)){
+
+course.style.display="block";
+
+}else{
+
+course.style.display="none";
+
+}
+
+});
+
+});
+
+});
+
+/* ==========================================
+   FILTER BUTTON STYLE
+========================================== */
+
+const filterStyle=document.createElement("style");
+
+filterStyle.innerHTML=`
+
+.filter-btn{
+
+padding:12px 24px;
+
+margin:6px;
+
+border:none;
+
+border-radius:40px;
+
+cursor:pointer;
+
+background:#e2e8f0;
+
+transition:.35s;
+
+font-weight:600;
+
+}
+
+.filter-btn:hover{
+
+background:#2563eb;
+
+color:#fff;
+
+}
+
+.filter-btn.active{
+
+background:#2563eb;
+
+color:#fff;
+
+}
+
+`;
+
+document.head.appendChild(filterStyle);
+
+/* ==========================================
+   INPUT FOCUS EFFECT
+========================================== */
+
+document.querySelectorAll("input,textarea").forEach(input=>{
+
+input.addEventListener("focus",()=>{
+
+input.style.borderColor="#2563eb";
+
+input.style.boxShadow="0 0 10px rgba(37,99,235,.2)";
+
+});
+
+input.addEventListener("blur",()=>{
+
+input.style.borderColor="";
+
+input.style.boxShadow="";
+
+});
+
+});
+
+/* ==========================================
+   CHARACTER COUNTER
+========================================== */
+
+const messageBox=document.querySelector("#message");
+
+if(messageBox){
+
+const counter=document.createElement("small");
+
+counter.style.display="block";
+counter.style.marginTop="8px";
+counter.style.color="#64748b";
+
+messageBox.after(counter);
+
+messageBox.addEventListener("input",()=>{
+
+counter.textContent=
+
+messageBox.value.length+" characters";
+
+});
+
+}
+
+/* ==========================================
+   DEBUG
+========================================== */
+
+console.log("✔ Contact Form Validation Loaded");
+console.log("✔ Live Course Search Loaded");
+console.log("✔ Course Filter Loaded");

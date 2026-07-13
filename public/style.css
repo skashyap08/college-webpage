@@ -2017,3 +2017,334 @@ section h2::after{
     }
 
 }
+/* ==========================================================
+   PART 2C-3A
+   CALL TO ACTION (CTA)
+========================================================== */
+
+.cta{
+    position:relative;
+    overflow:hidden;
+    padding:100px 8%;
+    text-align:center;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    color:#fff;
+    border-radius:30px;
+    margin:80px 8%;
+    box-shadow:0 25px 60px rgba(37,99,235,.30);
+}
+
+/* Decorative Shapes */
+
+.cta::before{
+    content:"";
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:rgba(255,255,255,.10);
+    top:-180px;
+    left:-120px;
+}
+
+.cta::after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    bottom:-150px;
+    right:-120px;
+}
+
+/* Floating Blur */
+
+.cta .circle1,
+.cta .circle2{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(10px);
+
+    animation:floatCircle 8s infinite ease-in-out;
+}
+
+.cta .circle1{
+
+    width:80px;
+    height:80px;
+
+    background:rgba(255,255,255,.15);
+
+    top:30px;
+    right:15%;
+}
+
+.cta .circle2{
+
+    width:60px;
+    height:60px;
+
+    background:rgba(255,255,255,.12);
+
+    bottom:40px;
+    left:18%;
+}
+
+/* Heading */
+
+.cta h2{
+
+    color:#fff;
+
+    font-size:48px;
+
+    margin-bottom:20px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.cta h2::after{
+    display:none;
+}
+
+/* Description */
+
+.cta p{
+
+    max-width:720px;
+
+    margin:auto;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    margin-bottom:40px;
+
+    position:relative;
+
+    z-index:2;
+
+    color:#f1f5f9;
+}
+
+/* CTA Buttons */
+
+.cta-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.cta .btn{
+
+    background:#ffffff;
+
+    color:#2563eb;
+
+    padding:16px 36px;
+
+    border-radius:50px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+}
+
+.cta .btn:hover{
+
+    transform:translateY(-8px);
+
+    background:#0f172a;
+
+    color:#ffffff;
+}
+
+.cta .btn.secondary{
+
+    background:transparent;
+
+    color:#ffffff;
+
+    border:2px solid #ffffff;
+}
+
+.cta .btn.secondary:hover{
+
+    background:#ffffff;
+
+    color:#2563eb;
+}
+
+/* Stats */
+
+.cta-stats{
+
+    margin-top:60px;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:30px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.cta-stat{
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:18px;
+
+    padding:25px;
+}
+
+.cta-stat h3{
+
+    font-size:36px;
+
+    margin-bottom:8px;
+}
+
+.cta-stat p{
+
+    margin:0;
+
+    font-size:15px;
+
+    color:#e2e8f0;
+}
+
+/* Floating Animation */
+
+@keyframes floatCircle{
+
+    0%{
+
+        transform:translateY(0px);
+    }
+
+    50%{
+
+        transform:translateY(-20px);
+    }
+
+    100%{
+
+        transform:translateY(0px);
+    }
+}
+
+/* Fade Animation */
+
+.cta{
+
+    animation:ctaFade 1s ease;
+}
+
+@keyframes ctaFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(60px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+    .cta{
+
+        margin:70px 20px;
+    }
+
+    .cta h2{
+
+        font-size:40px;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .cta{
+
+        padding:80px 30px;
+    }
+
+    .cta h2{
+
+        font-size:34px;
+    }
+
+    .cta p{
+
+        font-size:16px;
+    }
+
+    .cta-buttons{
+
+        flex-direction:column;
+
+        align-items:center;
+    }
+
+    .cta .btn{
+
+        width:240px;
+
+        text-align:center;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .cta{
+
+        padding:60px 20px;
+    }
+
+    .cta h2{
+
+        font-size:28px;
+    }
+
+    .cta-stat h3{
+
+        font-size:28px;
+    }
+
+}

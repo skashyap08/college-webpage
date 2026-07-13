@@ -1444,3 +1444,369 @@ document.head.appendChild(particleStyle);
 console.log("✔ Dark Mode Loaded");
 console.log("✔ Typing Effect Loaded");
 console.log("✔ Hero Animation Loaded");
+/* ==========================================================
+   PART 3C-2
+   TESTIMONIAL SLIDER + SCROLL SPY + INTERACTIVE EFFECTS
+========================================================== */
+
+"use strict";
+
+/* ==========================================
+   AUTO TESTIMONIAL SLIDER
+========================================== */
+
+const testimonialContainer = document.querySelector(".testimonial-slider");
+
+if (testimonialContainer) {
+
+    let currentSlide = 0;
+    const cards = testimonialContainer.querySelectorAll(".testimonial");
+
+    function showSlide(index) {
+
+        cards.forEach((card, i) => {
+
+            if (window.innerWidth <= 768) {
+
+                card.style.display = (i === index) ? "block" : "none";
+
+            }
+
+        });
+
+    }
+
+    if (window.innerWidth <= 768 && cards.length > 0) {
+
+        showSlide(0);
+
+        setInterval(() => {
+
+            currentSlide++;
+
+            if (currentSlide >= cards.length) {
+
+                currentSlide = 0;
+
+            }
+
+            showSlide(currentSlide);
+
+        }, 4000);
+
+    }
+
+}
+
+/* ==========================================
+   SCROLL SPY NAVIGATION
+========================================== */
+
+const sections = document.querySelectorAll("section[id]");
+const navItems = document.querySelectorAll(".nav-links a");
+
+window.addEventListener("scroll", () => {
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop - 120;
+
+        if (pageYOffset >= sectionTop) {
+
+            current = section.getAttribute("id");
+
+        }
+
+    });
+
+    navItems.forEach(link => {
+
+        link.classList.remove("active-link");
+
+        if (link.getAttribute("href") === "#" + current) {
+
+            link.classList.add("active-link");
+
+        }
+
+    });
+
+});
+
+/* Active Link Style */
+
+const activeStyle = document.createElement("style");
+
+activeStyle.innerHTML = `
+
+.active-link{
+
+color:#2563eb !important;
+
+font-weight:700;
+
+position:relative;
+
+}
+
+.active-link::after{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+bottom:-6px;
+
+width:100%;
+
+height:3px;
+
+background:#2563eb;
+
+border-radius:10px;
+
+}
+
+`;
+
+document.head.appendChild(activeStyle);
+
+/* ==========================================
+   PROGRESS BAR ANIMATION
+========================================== */
+
+const progressBars = document.querySelectorAll(".progress-fill");
+
+const progressObserver = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            const bar = entry.target;
+
+            const value = bar.dataset.width || "100";
+
+            bar.style.width = value + "%";
+
+        }
+
+    });
+
+}, {
+
+    threshold: 0.4
+
+});
+
+progressBars.forEach(bar => {
+
+    bar.style.width = "0";
+
+    progressObserver.observe(bar);
+
+});
+
+/* ==========================================
+   NUMBER COUNT-UP
+========================================== */
+
+const stats = document.querySelectorAll(".stat-number");
+
+stats.forEach(stat => {
+
+    const observer = new IntersectionObserver(entries => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                const target = Number(stat.dataset.target);
+
+                let value = 0;
+
+                const timer = setInterval(() => {
+
+                    value += Math.ceil(target / 80);
+
+                    if (value >= target) {
+
+                        value = target;
+
+                        clearInterval(timer);
+
+                    }
+
+                    stat.textContent = value;
+
+                }, 20);
+
+                observer.unobserve(stat);
+
+            }
+
+        });
+
+    });
+
+    observer.observe(stat);
+
+});
+
+/* ==========================================
+   CARD HOVER ROTATION
+========================================== */
+
+document.querySelectorAll(".card").forEach(card => {
+
+    card.addEventListener("mousemove", e => {
+
+        const rect = card.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+
+        const y = e.clientY - rect.top;
+
+        const rotateX = ((y / rect.height) - 0.5) * 8;
+
+        const rotateY = ((x / rect.width) - 0.5) * -8;
+
+        card.style.transform =
+            `perspective(900px)
+             rotateX(${rotateX}deg)
+             rotateY(${rotateY}deg)
+             translateY(-8px)`;
+
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+        card.style.transform = "";
+
+    });
+
+});
+
+/* ==========================================
+   RANDOM QUOTE CHANGER
+========================================== */
+
+const quote = document.querySelector(".hero-quote");
+
+if (quote) {
+
+    const quotes = [
+
+        "Empowering Future Leaders",
+        "Knowledge Changes Everything",
+        "Innovation Starts Here",
+        "Dream • Learn • Achieve",
+        "Education Beyond Books"
+
+    ];
+
+    let q = 0;
+
+    setInterval(() => {
+
+        q++;
+
+        if (q >= quotes.length) q = 0;
+
+        quote.style.opacity = "0";
+
+        setTimeout(() => {
+
+            quote.textContent = quotes[q];
+
+            quote.style.opacity = "1";
+
+        }, 400);
+
+    }, 5000);
+
+}
+
+/* ==========================================
+   CLICK RIPPLE FOR CARDS
+========================================== */
+
+document.querySelectorAll(".card").forEach(card => {
+
+    card.addEventListener("click", e => {
+
+        const ripple = document.createElement("span");
+
+        ripple.className = "card-ripple";
+
+        ripple.style.left = e.offsetX + "px";
+
+        ripple.style.top = e.offsetY + "px";
+
+        card.appendChild(ripple);
+
+        setTimeout(() => ripple.remove(), 700);
+
+    });
+
+});
+
+const rippleCSS = document.createElement("style");
+
+rippleCSS.innerHTML = `
+
+.card{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.card-ripple{
+
+position:absolute;
+
+width:20px;
+
+height:20px;
+
+background:rgba(255,255,255,.4);
+
+border-radius:50%;
+
+transform:translate(-50%,-50%) scale(0);
+
+animation:cardRipple .7s linear;
+
+pointer-events:none;
+
+}
+
+@keyframes cardRipple{
+
+to{
+
+transform:translate(-50%,-50%) scale(18);
+
+opacity:0;
+
+}
+
+}
+
+`;
+
+document.head.appendChild(rippleCSS);
+
+/* ==========================================
+   DEBUG
+========================================== */
+
+console.log("✔ Testimonial Slider Loaded");
+console.log("✔ Scroll Spy Enabled");
+console.log("✔ Interactive Effects Loaded");

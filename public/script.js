@@ -2069,3 +2069,374 @@ messageBox.value.length+" characters";
 console.log("✔ Contact Form Validation Loaded");
 console.log("✔ Live Course Search Loaded");
 console.log("✔ Course Filter Loaded");
+/* ==========================================================
+   PART 3D-2
+   COUNTDOWN • COOKIE CONSENT • TOAST • GREETING
+========================================================== */
+
+"use strict";
+
+/* ==========================================
+   EVENT COUNTDOWN TIMER
+========================================== */
+
+const countdown = document.querySelector("#countdown");
+
+if(countdown){
+
+// Change this date to your college event
+const eventDate = new Date("December 31, 2026 10:00:00").getTime();
+
+const timer = setInterval(()=>{
+
+const now = new Date().getTime();
+
+const distance = eventDate - now;
+
+if(distance < 0){
+
+clearInterval(timer);
+
+countdown.innerHTML = "Event Started!";
+
+return;
+
+}
+
+const days = Math.floor(distance/(1000*60*60*24));
+const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+const seconds = Math.floor((distance%(1000*60))/1000);
+
+countdown.innerHTML =
+
+`${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+},1000);
+
+}
+
+/* ==========================================
+   COOKIE CONSENT
+========================================== */
+
+if(!localStorage.getItem("cookieAccepted")){
+
+const cookie=document.createElement("div");
+
+cookie.className="cookie-box";
+
+cookie.innerHTML=`
+
+<p>
+🍪 We use cookies to improve your experience.
+</p>
+
+<button id="acceptCookie">
+Accept
+</button>
+
+`;
+
+document.body.appendChild(cookie);
+
+document.getElementById("acceptCookie")
+
+.addEventListener("click",()=>{
+
+localStorage.setItem("cookieAccepted","true");
+
+cookie.remove();
+
+});
+
+}
+
+/* Cookie Style */
+
+const cookieStyle=document.createElement("style");
+
+cookieStyle.innerHTML=`
+
+.cookie-box{
+
+position:fixed;
+
+bottom:25px;
+
+left:25px;
+
+background:#0f172a;
+
+color:#fff;
+
+padding:20px;
+
+border-radius:15px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+z-index:9999;
+
+max-width:300px;
+
+animation:slideCookie .5s ease;
+
+}
+
+.cookie-box button{
+
+margin-top:12px;
+
+padding:10px 18px;
+
+border:none;
+
+background:#2563eb;
+
+color:#fff;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+@keyframes slideCookie{
+
+from{
+
+transform:translateY(100px);
+
+opacity:0;
+
+}
+
+to{
+
+transform:translateY(0);
+
+opacity:1;
+
+}
+
+}
+
+`;
+
+document.head.appendChild(cookieStyle);
+
+/* ==========================================
+   TOAST NOTIFICATION
+========================================== */
+
+function showToast(message){
+
+const toast=document.createElement("div");
+
+toast.className="toast";
+
+toast.innerHTML=message;
+
+document.body.appendChild(toast);
+
+setTimeout(()=>{
+
+toast.classList.add("show");
+
+},100);
+
+setTimeout(()=>{
+
+toast.classList.remove("show");
+
+setTimeout(()=>{
+
+toast.remove();
+
+},500);
+
+},3000);
+
+}
+
+const toastStyle=document.createElement("style");
+
+toastStyle.innerHTML=`
+
+.toast{
+
+position:fixed;
+
+top:30px;
+
+right:30px;
+
+background:#2563eb;
+
+color:#fff;
+
+padding:15px 25px;
+
+border-radius:10px;
+
+opacity:0;
+
+transform:translateX(80px);
+
+transition:.4s;
+
+z-index:99999;
+
+}
+
+.toast.show{
+
+opacity:1;
+
+transform:translateX(0);
+
+}
+
+`;
+
+document.head.appendChild(toastStyle);
+
+/* ==========================================
+   WELCOME MESSAGE
+========================================== */
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+showToast("🎓 Welcome to FutureTech College!");
+
+},1000);
+
+});
+
+/* ==========================================
+   DYNAMIC GREETING
+========================================== */
+
+const greeting=document.querySelector(".greeting");
+
+if(greeting){
+
+const hour=new Date().getHours();
+
+let text="Welcome";
+
+if(hour<12){
+
+text="🌞 Good Morning";
+
+}
+
+else if(hour<17){
+
+text="☀️ Good Afternoon";
+
+}
+
+else{
+
+text="🌙 Good Evening";
+
+}
+
+greeting.textContent=text;
+
+}
+
+/* ==========================================
+   NEWSLETTER SUBMIT
+========================================== */
+
+const newsletter=document.querySelector("#newsletterForm");
+
+if(newsletter){
+
+newsletter.addEventListener("submit",(e)=>{
+
+e.preventDefault();
+
+showToast("✅ Thank you for subscribing!");
+
+newsletter.reset();
+
+});
+
+}
+
+/* ==========================================
+   COPY PHONE NUMBER
+========================================== */
+
+const phoneBtn=document.querySelector(".copy-phone");
+
+if(phoneBtn){
+
+phoneBtn.addEventListener("click",()=>{
+
+navigator.clipboard.writeText(phoneBtn.dataset.phone);
+
+showToast("📞 Phone Number Copied");
+
+});
+
+}
+
+/* ==========================================
+   ONLINE STATUS
+========================================== */
+
+window.addEventListener("offline",()=>{
+
+showToast("⚠ Internet Connection Lost");
+
+});
+
+window.addEventListener("online",()=>{
+
+showToast("✅ Back Online");
+
+});
+
+/* ==========================================
+   PRELOAD IMAGES
+========================================== */
+
+document.querySelectorAll("img").forEach(img=>{
+
+const image=new Image();
+
+image.src=img.src;
+
+});
+
+/* ==========================================
+   FINAL MESSAGE
+========================================== */
+
+console.log("%c===================================",
+"color:#2563eb");
+
+console.log("%cFutureTech College Website Ready!",
+"color:green;font-size:18px;font-weight:bold;");
+
+console.log("%cHTML ✔",
+"color:orange");
+
+console.log("%cCSS ✔",
+"color:blue");
+
+console.log("%cJavaScript ✔",
+"color:red");
+
+console.log("%cExpress Server ✔",
+"color:green");
+
+console.log("%c===================================",
+"color:#2563eb");

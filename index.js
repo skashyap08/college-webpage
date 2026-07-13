@@ -14,3 +14,18 @@ app.get("/", (req, res) => {
 app.get("/about", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "about.html"));
 });
+app.get("/courses", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "courses.html"));
+});
+
+app.get("/admissions", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "admissions.html"));
+});
+
+app.get("/faculty", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "faculty.html"));
+});
+
+app.get("/contact", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "contact.html"));
+});

@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  express-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: express-advanced
+
+    ports:
+      - "6000:6000"
+
+    env_file:
+      - .env
+
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+    restart: unless-stopped
+
+    command: npm run dev

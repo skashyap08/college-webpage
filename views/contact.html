@@ -367,3 +367,179 @@ Apply Now
             </p>
 
         </div>
+         <div class="contact-form-wrapper">
+
+            <form action="/contact"
+                  method="POST"
+                  class="contact-form">
+
+                <div class="form-grid">
+
+                    <!-- Full Name -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+
+                            Full Name
+
+                        </label>
+
+                        <input type="text"
+                               id="name"
+                               name="name"
+                               placeholder="Enter your full name"
+                               required>
+
+                    </div>
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+
+                            Email Address
+
+                        </label>
+
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               placeholder="Enter your email"
+                               required>
+
+                    </div>
+
+                    <!-- Phone -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+
+                            Mobile Number
+
+                        </label>
+
+                        <input type="tel"
+                               id="phone"
+                               name="phone"
+                               placeholder="Enter your mobile number"
+                               required>
+
+                    </div>
+
+                    <!-- Subject -->
+
+                    <div class="form-group">
+
+                        <label for="subject">
+
+                            Subject
+
+                        </label>
+
+                        <select id="subject"
+                                name="subject"
+                                required>
+
+                            <option value="">
+                                Select Subject
+                            </option>
+
+                            <option>
+                                Admission Inquiry
+                            </option>
+
+                            <option>
+                                Course Information
+                            </option>
+
+                            <option>
+                                Scholarship
+                            </option>
+
+                            <option>
+                                Placements
+                            </option>
+
+                            <option>
+                                Campus Visit
+                            </option>
+
+                            <option>
+                                General Inquiry
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Message -->
+
+                <div class="form-group">
+
+                    <label for="message">
+
+                        Your Message
+
+                    </label>
+
+                    <textarea id="message"
+                              name="message"
+                              rows="7"
+                              placeholder="Write your message here..."
+                              required></textarea>
+
+                </div>
+
+                <!-- Checkbox -->
+
+                <div class="checkbox-group">
+
+                    <input type="checkbox"
+                           id="privacy"
+                           required>
+
+                    <label for="privacy">
+
+                        I agree to the Privacy Policy and consent
+                        to being contacted regarding my inquiry.
+
+                    </label>
+
+                </div>
+
+                <!-- Buttons -->
+
+                <div class="form-buttons">
+
+                    <button type="submit"
+                            class="btn">
+
+                        <i class="fas fa-paper-plane"></i>
+
+                        Send Message
+
+                    </button>
+
+                    <button type="reset"
+                            class="btn secondary">
+
+                        <i class="fas fa-rotate-left"></i>
+
+                        Reset Form
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>

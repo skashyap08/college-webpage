@@ -1,10 +1,17 @@
+
 services:
   express-app:
-    build: .
-    container_name: express-website
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: coll-website
 
     ports:
       - "6000:6000"
+
+    env_file:
+      - .env
 
     volumes:
       - .:/app
